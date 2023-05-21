@@ -1,6 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
+import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SingUp/SignUp";
+import BookService from "../Pages/BookService/BookService";
+import Bookings from "../Pages/Bookings/Bookings";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -10,6 +15,25 @@ const router = createBrowserRouter([
         {
             path: '/',
             element: <Home></Home>
+        },
+        {
+          path: 'login',
+          element: <Login></Login>
+        },
+        {
+          path: 'signup',
+          element: <SignUp></SignUp>
+        },
+        {
+          path: 'bookings',
+          element: <PrivateRoutes><Bookings></Bookings></PrivateRoutes>,
+
+          
+        },
+        {
+          path: 'book/:id',
+          element: <PrivateRoutes> <BookService></BookService></PrivateRoutes>,
+          loader: ({params}) => fetch(`https://car-doctor-server-zeta-eight.vercel.app/checkout/${params.id}`)
         }
       ]
     },
